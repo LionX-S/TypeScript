@@ -121,3 +121,35 @@
               - 严格的检查空值，默认为false
             - <font color=red>strict</font>
               - 所有严格检查的总开关，默认为false
+
+
+# Vite
+  - vite也是前端构建工具
+  - 相较于webpack，vite采用了不同的运行方式
+    - 开发时，并不对项目打包，而是直接采用ESM的方式来运行项目。
+    - 项目部署时，再对项目进行打包
+  - 基本使用
+    1. 安装开发依赖vite
+    2. vite的源码目录就是项目根目录
+    3. 开发命令：
+       1. vite 启动开发服务器
+       2. vite build打包代码
+       3. vite preview预览打包后的代码
+  - 使用命令构建
+    ```npm create vite@latest```
+  - 配置文件：```vite.config.js```
+    - 格式：
+      ```JavaScript
+      // vite.config.js
+      import legacy from '@vitejs/plugin-legacy'
+      //这个方法可以包也可不包，包上会有书写提示
+      import { defineConfig } from 'vite'
+
+      export default defineConfig({
+        plugins: [
+          legacy({
+            targets: ['defaults', 'not IE 11'],
+          }),
+        ],
+      })
+      ```
