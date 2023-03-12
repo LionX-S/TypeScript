@@ -153,3 +153,22 @@
         ],
       })
       ```
+# 面向对象
+$\quad$ 程序中一切皆对象
+## 1.类（class）
+要想面向对象，操作对象，首先得拥有对象。要创建对象，必须要先定义类，所谓的类可以理解为对象的模型，程序中可以根据类创建指定类型的对象。
+```typescript
+  class Person{
+    // 实例属性需要通过创建对象来访问
+    name: string;
+    age: number;
+    // 静态属性(类属性)通过类直接访问 Person.height
+    static height: number;
+    // 只读属性 不能修改
+    readonly gender:string
+    // 方法也是同理 静态方法和实例方法
+    static eat() {
+
+    }
+  }
+```
