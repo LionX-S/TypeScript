@@ -162,6 +162,10 @@ $\quad$ 程序中一切皆对象
     // 实例属性需要通过创建对象来访问
     name: string;
     age: number;
+    constructor(name: string,age: number) {
+      this.name = name;
+      this.age = age;
+    }
     // 静态属性(类属性)通过类直接访问 Person.height
     static height: number;
     // 只读属性 不能修改
@@ -171,4 +175,118 @@ $\quad$ 程序中一切皆对象
 
     }
   }
+```
+## 2.继承
+```typescript
+class Animal{
+  name: string;
+  age: number
+  constructor(name: string,age: number) {
+    this.name = name;
+    this.age = age;
+  }
+  sayHello() {
+    console.log()
+  }
+}
+// Dog类继承Animal类
+// 使用继承后，子类中将会拥有父类所有的属性与方法
+// 通过继承可以将多个类中共有的代码写在父类中
+class Dog extends Animal {
+  // 子类总的构造函数中必须写super，调用父类的构造函数
+  constructor(name: string,age:number,height: number) {
+    super(name, age);
+    this.height = height;
+  }
+  // 子类中也可有自己的方法
+ run() {
+
+ }
+ sayHello() {
+  // 在类方法中，super就代表当前类的父类
+  super.sayHello()
+ }
+}
+
+// 以abstract开头的类为抽象类，作用是用来继承的，不能创建实例。抽象类中可以添加抽象方法
+abstract class Animal {
+  name: string;
+  constructor(name: string) {
+    this.name = name
+  }
+  // 抽象方法,以abstract开头，没有方法体，没有返回
+  // 只能定义在抽象类中，子类必须重写抽象方法
+  abstract sayHello(): void;
+}
+```
+
+## 3.接口
+```typescript
+// 接口用来定义一个类的结构，用来定义一个类中应该包含哪个属性和方法，同时接口也可作为类型声明去使用,
+interface myInterface {
+  name: string;
+  age: number
+}
+// 可以重复定义
+interface myInterface {
+  gender: string
+}
+const obj:myInterface = {
+  name: 'ss',
+  age: 19,
+  gender: '男'
+}
+
+// 定义类时，可以使类去实现一个接口,接口就是对类的限制，必须满足接口
+class MyClass implement myInterface{
+  name: string;
+  age: number;
+  gender: string;
+  constructor(name: string,age: number,gender: string){
+    this.name = name;
+    this.age = age;
+    this.gender = gender;
+  }
+}
+```
+## 4.属性的封装
+```typescript
+// public修饰的属性可以在任意位置访问（修改）
+// private 私有属性，只能在类内部进行访问；或者可以在类内部添加getter setter使得属性在类外部能访问
+// protected 受保护的属性，只能在当前类或者当前类的子类中访问
+```
+# 五 泛型
+在定义函数或是类时，如果遇到类型不明确就可以使用泛型.到函数调用时才能确定具体类型
+```typescript
+function fn<T>(a: T): T{
+  return a;
+}
+// 直接调用
+// 不指定泛型，TS可以自动推断
+let a = fn(10);
+// 指定泛型
+let b = fn<string>('string');
+// 泛型可以同时指定多个
+function fn2<T,K>(a: T,b:K):T {
+  console.log(b);
+  return a;
+}
+let c = fn2<number, string>(123,'123');
+// 也可通过接口实现
+interface Inter{
+  length:number
+}
+// T extends Inter 表示泛型T必须是Inter实现类（子类）
+function fn3<T extends Inter>(a: T): number {
+  return a.length;
+}
+
+// 类也可以使用泛型
+class MyClass<T> {
+  name: T;
+  constructor(name: T) {
+    this.name = name;
+  }
+}
+const mc = new MyClass<string>('jack');
 ```
