@@ -1,6 +1,4 @@
 import './style.css';
-import Food from './Food';
+import GameControl from './modules/GameControl';
 
-// 生成food
-new Food();
-
+new GameControl();
