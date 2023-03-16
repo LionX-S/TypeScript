@@ -22,8 +22,16 @@ export default class Snake {
     if (this.X / 16 === value) {
       return;
     }
-    if (value < 0 || value > 29) {
+    if (this.X/16 < 0 || this.X/16 > 29) {
       throw new Error('蛇撞墙')
+    }
+    if (this.snakeBody[1] && (this.snakeBody[1].offsetLeft / 16) === value) {
+      if (value > this.X / 16) {
+        // 若value大于this.x 说明蛇想往右掉头，此时阻止掉头，继续往左
+        value = this.X / 16 - 1;
+      } else {
+        value = this.X / 16 + 1;
+      }
     }
     this.moveBody();
     this.snakeHead.style.left = `${value}rem`;
@@ -33,8 +41,16 @@ export default class Snake {
     if (this.Y / 16 === value) {
       return;
     }
-    if (value < 0 || value > 29) {
+    if (this.Y/16 < 0 || this.Y/16 > 29) {
       throw new Error('蛇撞墙')
+    }
+    if (this.snakeBody[1] && (this.snakeBody[1].offsetTop / 16) === value) {
+      if (value > this.Y / 16) {
+        // 若value大于this.x 说明蛇想往右掉头，此时阻止掉头，继续往左
+        value = this.Y / 16 - 1;
+      } else {
+        value = this.Y / 16 + 1;
+      }
     }
     this.moveBody();
     this.snakeHead.style.top = `${value}rem`;
